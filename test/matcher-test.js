@@ -5,13 +5,13 @@ const SearchIndexSearcher = require('../')
 const num = require('written-number')
 const Readable = require('stream').Readable
 const batchSize = 20
-const levelup = require('levelup')
+const level = require('level')
 
 var sia, sis
 
 test('initialize a search index', t => {
   t.plan(3)
-  levelup(sandbox + 'matcher-test', {
+  level(sandbox + 'matcher-test', {
     valueEncoding: 'json'
   }, function (err, db) {
     t.error(err)
