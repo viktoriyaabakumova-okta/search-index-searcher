@@ -16,7 +16,7 @@ const Readable = require('stream').Readable
 const ReplaceSynonyms = require('./lib/ReplaceSynonyms.js').ReplaceSynonyms
 const ScoreDocsOnField = require('./lib/ScoreDocsOnField.js').ScoreDocsOnField
 const ScoreTopScoringDocsTFIDF = require('./lib/ScoreTopScoringDocsTFIDF.js').ScoreTopScoringDocsTFIDF
-const levelup = require('levelup')
+const level = require('level')
 const matcher = require('./lib/matcher.js')
 const siUtil = require('./lib/siUtil.js')
 const sw = require('stopword')
@@ -195,7 +195,7 @@ const getOptions = function (options, done) {
   Logger.setHandler(Searcher.options.logHandler)
 
   if (!options.indexes) {
-    levelup(Searcher.options.indexPath || 'si', {
+    level(Searcher.options.indexPath || 'si', {
       valueEncoding: 'json'
     }, function (err, db) {
       Searcher.options.indexes = db
